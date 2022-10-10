@@ -28,3 +28,8 @@
 "TRUE","Misc // Comment","pkt_comment",""
 "TRUE","TCP // Immediate Reset"," (tcp.flags.reset == 1 and tcp.ack == 1)",""
 "TRUE","DNS // qry no reverse","dns and not dns.qry.type == 12 and dns.count.answers == 0",""
+"TRUE","Filter internal subnets","!tcp.port == 9200 and not tcp.port == 5000 and( ip.src == 10.0.0.0/8 or  ip.addr == 192.168.128.0/2 ) and ( ip.dst == 192.168.128.0/24 or ip.dst == 10.0.0.0/8 )",""
+"TRUE","Multicast or internal nets","!tcp.port == 9200 and not tcp.port == 5000 and not tcp.port == 8220 and( ip.src == 10.0.0.0/8 or  ip.src == 192.168.128.0/2 ) and ( eth.dst.ig == 1 or ip.dst == 192.168.128.0/24 or ip.dst == 10.0.0.0/8 )",""
+"TRUE","ICMP // Bad (with not)","icmp and not (icmp.type == 0 or icmp.type == 8) ",""
+"TRUE","ICMP // Bad (pre4.0)","icmp and ((icmp.type > 0 and icmp.type < 8) or icmp.type gt 8)  ",""
+"TRUE","ICMP // Bad"," icmp.type#1!=8 and icmp.type#1!=0 ",""
